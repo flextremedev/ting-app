@@ -23,7 +23,10 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@types/react-navigation": "^1.0.30",
     "expo": "^23.0.4",
+    "glamorous-native": "^1.3.0",
+    "native-base": "^2.3.8",
     "react": "16.0.0",
     "react-native": "0.50.3",
     "react-navigation": "^1.0.0"

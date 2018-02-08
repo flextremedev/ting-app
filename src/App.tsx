@@ -1,25 +1,28 @@
-import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import * as React from 'react';
+import { Container } from './Atoms/Container';
+import { LoggedIn, LoggedOut, createRootNavigator } from './Router';
 
-type AppProps = {}
+type AppProps = {};
 
-type AppState = {}
+type AppState = {
+    loggedIn: boolean;
+};
 
 export class App extends React.Component<AppProps, AppState> {
+    state = {
+        loggedIn: false,
+    };
+
+    login = () => {
+        this.setState({ loggedIn: true });
+    };
+    logout = () => {
+        this.setState({ loggedIn: false });
+    };
     render() {
+        const Layout = createRootNavigator(this.state.loggedIn);
         return (
-            <View style={styles.container}>
-                <Text>Open up App.tsx to start working on your app!</Text>
-            </View>
-        )
+            <Layout screenProps={{ login: this.login, logout: this.logout }} />
+        );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
