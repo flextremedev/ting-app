@@ -18,5 +18,5 @@ export class RegisterForm extends React.Component {
 }
 
 const RegisterFormContainer = glamorous.view({
-    width: 240,
+    width: 280,
 });

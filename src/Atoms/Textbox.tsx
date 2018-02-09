@@ -4,7 +4,7 @@ import { white, underlineGrey } from '../../StyleGuide';
 import * as React from 'react';
 type Props = NativeBase.Input;
 const StyledItem = glamorous(Item)({
-    width: 240,
+    width: 280,
     height: 33,
 });
 

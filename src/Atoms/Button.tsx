@@ -8,7 +8,7 @@ type Props = {
 
 const ButtonContainer = glamorous(NativeButton)({
     backgroundColor: brandGreen,
-    width: 240,
+    width: 280,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',

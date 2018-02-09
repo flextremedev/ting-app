@@ -22,5 +22,5 @@ export class LoginForm extends React.Component<Props> {
 }
 
 const LoginFormContainer = glamorous.view({
-    width: 240,
+    width: 280,
 });
