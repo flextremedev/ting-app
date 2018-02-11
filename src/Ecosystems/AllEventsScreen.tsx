@@ -1,34 +1,37 @@
 import * as React from 'react';
 import { Container } from '../Atoms/Container';
-import { Logo } from '../Atoms/Logo';
-import { LoginForm } from '../Molecules/LoginForm';
-import { LightButton } from '../Atoms/LightButton';
-import { Spacer } from '../Atoms/Spacer';
 import { NavigationScreenProps, NavigationParams } from 'react-navigation';
-
+import { Event } from '../Models/Event';
+import { ListEntry } from '../Molecules/ListEntry';
+import { FlatList } from 'react-native';
 type Props = NavigationScreenProps<NavigationParams>;
+type State = {
+    events: Event[];
+};
 
-export class AllEventsScreen extends React.Component<Props> {
+export class AllEventsScreen extends React.Component<Props, State> {
     render() {
+        const events: Event[] = this.props.screenProps
+            ? this.props.screenProps.events
+            : [];
         return (
-            <Container
-                blue
-                contentContainerStyle={{ height: '100%', alignItems: 'center' }}
-            >
-                <Logo />
-                <LoginForm
-                    login={
-                        this.props.screenProps
-                            ? this.props.screenProps.login
-                            : null
-                    }
-                />
-                <Spacer />
-                <LightButton
-                    light
-                    transparent
-                    name="Noch kein Konto vorhanden?"
-                    onPress={() => this.props.navigation.navigate('Register')}
+            <Container>
+                <FlatList
+                    data={events}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => {
+                        return (
+                            <ListEntry
+                                content={`${item.title} - ${item.date}`}
+                                onPress={() =>
+                                    this.props.navigation.navigate('Event', {
+                                        event: item,
+                                    })
+                                }
+                                touchable
+                            />
+                        );
+                    }}
                 />
             </Container>
         );

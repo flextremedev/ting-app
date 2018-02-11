@@ -9,7 +9,35 @@ import { RegisterScreen } from './Ecosystems/RegisterScreen';
 import { AllEventsScreen } from './Ecosystems/AllEventsScreen';
 import { MyEventsScreen } from './Ecosystems/MyEventsScreen';
 import { ProfileScreen } from './Ecosystems/ProfileScreen';
-import { brandBlue } from '../StyleGuide';
+import { brandBlue, white } from '../StyleGuide';
+import { EventScreen } from './Ecosystems/EventScreen';
+
+export const EventNavigator: NavigationContainer = StackNavigator(
+    {
+        AllEvents: {
+            screen: AllEventsScreen,
+        },
+        Event: {
+            screen: EventScreen,
+        },
+    },
+    {
+        headerMode: 'float',
+        mode: 'modal',
+        initialRouteName: 'AllEvents',
+        navigationOptions: {
+            headerTintColor: white,
+            headerTitleStyle: {
+                fontWeight: 'normal',
+                fontSize: 17,
+            },
+            headerStyle: {
+                backgroundColor: brandBlue,
+            },
+            headerTitle: 'Alle Events',
+        },
+    },
+);
 
 export const LoggedOut: NavigationContainer = StackNavigator(
     {
@@ -29,13 +57,23 @@ export const LoggedOut: NavigationContainer = StackNavigator(
 export const LoggedIn = TabNavigator(
     {
         All: {
-            screen: AllEventsScreen,
+            screen: EventNavigator,
+            navigationOptions: {
+                header: null,
+                tabBarLabel: 'Alle Events',
+            },
         },
         Own: {
             screen: MyEventsScreen,
+            navigationOptions: {
+                title: 'Meine Events',
+            },
         },
         Profile: {
             screen: ProfileScreen,
+            navigationOptions: {
+                title: 'Konto',
+            },
         },
     },
     {
@@ -65,10 +103,13 @@ export const createRootNavigator = (loggedIn: boolean) => {
             headerMode: 'float',
             mode: 'card',
             navigationOptions: {
-                headerTintColor: '#000000',
+                headerTintColor: white,
                 headerTitleStyle: {
                     fontWeight: 'normal',
                     fontSize: 17,
+                },
+                headerStyle: {
+                    backgroundColor: brandBlue,
                 },
             },
         },

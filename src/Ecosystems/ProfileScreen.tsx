@@ -13,9 +13,20 @@ export class ProfileScreen extends React.Component<Props> {
     render() {
         return (
             <Container
-                contentContainerStyle={{ height: '100%', alignItems: 'center' }}
+                contentContainerStyle={{
+                    height: '100%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}
             >
-                <Button name="Ausloggen" />
+                <Button
+                    name="Ausloggen"
+                    onPress={
+                        this.props.screenProps
+                            ? this.props.screenProps.logout
+                            : null
+                    }
+                />
             </Container>
         );
     }

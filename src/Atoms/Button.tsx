@@ -12,6 +12,7 @@ const ButtonContainer = glamorous(NativeButton)({
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
+    alignSelf: 'center',
 });
 
 export const Button = ({ name, ...props }: Props) => {
