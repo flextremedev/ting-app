@@ -11,6 +11,9 @@ type State = {
 
 export class AllEventsScreen extends React.Component<Props, State> {
     render() {
+        const addToMyEvents = this.props.screenProps
+            ? this.props.screenProps.addToMyEvents
+            : null;
         const events: Event[] = this.props.screenProps
             ? this.props.screenProps.events
             : [];
@@ -26,6 +29,7 @@ export class AllEventsScreen extends React.Component<Props, State> {
                                 onPress={() =>
                                     this.props.navigation.navigate('Event', {
                                         event: item,
+                                        addToMyEvents: addToMyEvents,
                                     })
                                 }
                                 touchable

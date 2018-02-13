@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createRootNavigator } from './Router';
 import { Event } from './Models/Event';
+import { View, StatusBar } from 'react-native';
 type AppProps = {};
 
 type AppState = {
@@ -33,12 +34,18 @@ const events: Event[] = [
 ];
 
 export class App extends React.Component<AppProps, AppState> {
-    state = {
+    state: AppState = {
         loggedIn: false,
         events,
         myEvents: [],
     };
 
+    addToMyEvents = (event: Event) => {
+        const { myEvents } = this.state;
+        if (!myEvents.some((e: Event) => e.id === event.id)) {
+            this.setState({ myEvents: myEvents.concat(event) });
+        }
+    };
     login = () => {
         this.setState({ loggedIn: true });
     };
@@ -46,9 +53,22 @@ export class App extends React.Component<AppProps, AppState> {
         this.setState({ loggedIn: false });
     };
     render() {
-        const { login, logout } = this;
+        const { login, logout, addToMyEvents } = this;
         const { events, myEvents } = this.state;
         const Layout = createRootNavigator(this.state.loggedIn);
-        return <Layout screenProps={{ login, logout, events, myEvents }} />;
+        return (
+            <View style={{ height: '100%' }}>
+                <StatusBar backgroundColor="blue" barStyle="light-content" />
+                <Layout
+                    screenProps={{
+                        login,
+                        logout,
+                        events,
+                        myEvents,
+                        addToMyEvents,
+                    }}
+                />
+            </View>
+        );
     }
 }

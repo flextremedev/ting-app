@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Container } from '../Atoms/Container';
 import { NavigationScreenProps, NavigationParams } from 'react-navigation';
-import { Event } from '../Models/Event';
 import { ListEntry } from '../Molecules/ListEntry';
-import { List, Button, Text } from 'native-base';
-import { LightButton } from '../Atoms/LightButton';
+import { List, Text } from 'native-base';
+import { Button } from '../Atoms/Button';
+import glamorous from 'glamorous-native';
 type Props = NavigationScreenProps<NavigationParams>;
 
 export class EventScreen extends React.Component<Props> {
@@ -12,18 +12,19 @@ export class EventScreen extends React.Component<Props> {
         const { params } = navigation.state;
         const { event } = params;
         return {
-            headerRight: (
-                <Button transparent light>
-                    <Text>Teilnehmen</Text>
-                </Button>
-            ),
             headerTitle: event.title,
         };
     };
     render() {
-        const { event } = this.props.navigation.state.params;
+        const { event, addToMyEvents } = this.props.navigation.state.params;
         return (
-            <Container>
+            <Container
+                contentContainerStyle={{
+                    height: '100%',
+                    width: '100%',
+                    alignContent: 'center',
+                }}
+            >
                 <List>
                     <ListEntry itemDivider content="Was?" />
                     <ListEntry last content={`${event.title}`} />
@@ -35,7 +36,18 @@ export class EventScreen extends React.Component<Props> {
                     <ListEntry content={`${event.address}`} />
                     <ListEntry content={`${event.postalCode} ${event.city}`} />
                 </List>
+                <ButtonContainer>
+                    <Button
+                        name="Teilnehmen"
+                        onPress={() => addToMyEvents(event)}
+                    />
+                </ButtonContainer>
             </Container>
         );
     }
 }
+
+const ButtonContainer = glamorous.view({
+    flex: 1,
+    justifyContent: 'center',
+});

@@ -39,6 +39,33 @@ export const EventNavigator: NavigationContainer = StackNavigator(
     },
 );
 
+export const MyEventNavigator: NavigationContainer = StackNavigator(
+    {
+        MyEvents: {
+            screen: MyEventsScreen,
+        },
+        Event: {
+            screen: EventScreen,
+        },
+    },
+    {
+        headerMode: 'float',
+        mode: 'modal',
+        initialRouteName: 'MyEvents',
+        navigationOptions: {
+            headerTintColor: white,
+            headerTitleStyle: {
+                fontWeight: 'normal',
+                fontSize: 17,
+            },
+            headerStyle: {
+                backgroundColor: brandBlue,
+            },
+            headerTitle: 'Meine Events',
+        },
+    },
+);
+
 export const LoggedOut: NavigationContainer = StackNavigator(
     {
         Login: {
@@ -64,9 +91,10 @@ export const LoggedIn = TabNavigator(
             },
         },
         Own: {
-            screen: MyEventsScreen,
+            screen: MyEventNavigator,
             navigationOptions: {
-                title: 'Meine Events',
+                header: null,
+                tabBarLabel: 'Meine Events',
             },
         },
         Profile: {

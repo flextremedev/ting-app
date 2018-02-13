@@ -9,16 +9,22 @@ type Props = NavigationScreenProps<NavigationParams>;
 
 export class MyEventsScreen extends React.Component<Props> {
     render() {
-        const events = this.props.screenProps
-            ? this.props.screenProps.myEvents
+        const { myEvents, addToMyEvents } = this.props.screenProps
+            ? this.props.screenProps
             : [];
         return (
             <Container contentContainerStyle={{ height: '100%' }}>
                 <List>
-                    {events.map((e: Event) => (
+                    {myEvents.map((e: Event) => (
                         <ListEntry
                             key={e.id}
                             content={`${e.title} - ${e.date}`}
+                            onPress={() =>
+                                this.props.navigation.navigate('Event', {
+                                    event: e,
+                                    addToMyEvents: addToMyEvents,
+                                })
+                            }
                             touchable
                         />
                     ))}
